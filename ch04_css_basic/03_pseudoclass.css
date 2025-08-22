@@ -1,0 +1,79 @@
+.outer li{
+  color: olivedrab;
+}
+
+/*
+  .outer 공백 li로 되어 있다는 점을 봤을 때, outer 클래스 자손 요소인 li 태그들에게 color: oliveredrab이 적하라는 의미가 됩니다. 그렇기에 ol 요소의 자손 요소인 li에는 적용되지 않은 검은색인 상태가됨
+
+  java와 달리 자식 클래스 / 서브 클래스라는 표현을 쓰지 않는 이유는
+  
+  자식 / 손주 / 증손....하위 항목들이 전부 다 영향을 받기 때문이다.
+  사과/ 포도/ 딸기/ 키위도 oliveredrab이 적용된점을 확인하면 알수 있음.
+*/
+
+.outer >li{
+  color: lightblue;
+}
+
+.outer > li li{
+  text-decoration: underline;
+}
+
+/*
+  자손이 아니라자식(1촌 자식만 변경하고 싶을 시, '>"가 포함됨
+
+  .outer > li >li {
+  text-decoration: underline;
+  }
+  
+  작성시 동일할까요?
+
+  참고 : 
+  .outerli{color:olivedrab;}을 없앤다고 가정시, .outer{color:skyblue;}가 적용됨을 알수 있는데 이는 서체나 텍스트 관련 등 일부 css속성들이 자식들에게 자동으로 상속되기 때문. 즉 일촌 자식 결합자(>)라도 여기에 적용된 속성이 자동 상속을 지원하는 속성이라면 이를 덮어쓰는 다른 선택자/속성을 지원하지 않으면 자손들도 해당 속성을 물려받음
+  */
+
+.starter ~ li{
+  font-style: italic;
+}
+
+.starter+li{
+  font-weight: bold;
+}
+
+/* 가상클래스*/
+/*
+
+이상까지의 특정 id/ 특정 클래스를 선택하여 스타일을 지정했는데, 가상 클래스는 이와 달리 특정 상황을 가정하고 이름을 붙입니다. 작성방식은 콜로(:)을 이용
+
+  */
+
+ol li:first-child, ol li:last-child{
+  color:yellowgreen
+}
+
+/* ~ 가 아닌 요소 가상 클래스 */
+.outer > li:not(:last-child){
+  text-decoration: line-through;
+}
+
+ul:not(.outer)li{
+  font-weight: bold;
+}
+/*
+55번 라인을 해식시 outer클래스의 직계자식인 li태그 중에서 마지막 요소가 아닌것을 골라 line-through를 적용해라는 의미. 그렇다면 직계 자식인 육/채/유/과 중에서 마지막 과일을 뻰 나머지 3개에만 취소선이 생김
+
+59번 라인을 해석시, ul 태그중 outer클래스가 아닌 것을 골라서 그 자손인 li에 boid를 적용하는 의미. ul태그는 두개로 중첩되어 있기에 들여쓰기가 사용된지라 사/포/딸/키가 포함된 ul 은 class="outer"가 아니기에 void 적용
+*/
+
+/* ~번째 요소 가상 클래스 */
+ol li:nth-child(3n){
+  font-weight: bold;
+  color:pink;
+}
+
+/* 가상 클래스의 개념을 몰라도 자주 쓰는 예시*/
+li:hover{
+  font-weight: bold;
+  color:blue;
+}
+/* 마우스 오버 기능을 지원하는 :hover는 자주쓰이는 편인데 김3의 경우 pink에서 안바뀌는 것을 볼수 있는데 호버보다 우선순위가 높기 때문*/

@@ -1,0 +1,5 @@
+ul{
+  /* list-style: disc; -> default 
+  가능한 값 : disc/ circle/ square/ default */
+  list-style: "-";
+}
